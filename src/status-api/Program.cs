@@ -9,8 +9,11 @@ app.MapGet("/", () => Results.Ok(new
     version = Environment.GetEnvironmentVariable("APP_VERSION") ?? "dev",
     pod = Environment.MachineName,
     uptimeSeconds = (int)(DateTime.UtcNow - startTime).TotalSeconds,
-    timestamp = DateTime.UtcNow
+    timestamp = DateTime.UtcNow,
+    message = "hei fra hommelab"
 }));
+
+
 
 app.MapGet("/healthz", () => Results.Ok("healthy"));
 
