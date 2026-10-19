@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: status-api
-          image: ghcr.io/salahudinah/status-api:latest
+          image: ghcr.io/salahudinah/status-api:3a23e21d1296f4151bfa9194d27446d0cee1c88e
           ports:
             - containerPort: 8080
           readinessProbe:
