@@ -29,6 +29,17 @@ jobs:
         with:
           context: src/status-api
           push: true
+          build-args: |
+            APP_VERSION=${{ github.sha }}
           tags: |
             ghcr.io/salahudinah/status-api:${{ github.sha }}
             ghcr.io/salahudinah/status-api:latest
+
+      - name: Update image tag in manifest
+        run: |
+          sed -i "s|image: ghcr.io/salahudinah/status-api:.*|image: ghcr.io/salahudinah/status-api:${{ github.sha }}|" apps/status-api/deployment.yaml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/status-api/deployment.yaml
+          git commit -m "Deploy status-api ${{ github.sha }}"
+          git push
